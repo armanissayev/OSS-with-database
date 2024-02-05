@@ -2,43 +2,43 @@ package entities;
 
 public class Order {
 
-    private User user;
-    private Product product;
+    private int userId;
+    private int productId;
     private int quantity;
-    private double price;
+    private double cost;
 
     // Getters
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public Product getProduct() {
-        return product;
+    public int getProductId() {
+        return productId;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public double getPrice() {
-        return price;
+    public double getCost() {
+        return cost;
     }
 
     // Setters
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(int userId) {
+        this.userId = userId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProduct(int productId) {
+        this.productId = productId;
     }
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setCost(double price) {
+        this.cost = price;
     }
 
 }
