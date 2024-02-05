@@ -27,10 +27,20 @@ public class Main {
             createProductsTable(connection);
             createOrdersTable(connection);
 
+            // User
             UserRepository userRepository = new UserRepository(connection);
             UserController userController = new UserController(userRepository);
 
-            runUserManagementApp(userController);
+            // Product
+            ProductRepository productRepository = new ProductRepository(connection);
+            ProductController productController = new ProductController(productRepository);
+
+
+            // Order
+            OrderRepository orderRepository = new OrderRepository(connection);
+            OrderController orderController = new OrderController(orderRepository, userRepository, productRepository);
+
+            runUserManagementApp(userController, productController, orderController);
 
             connection.close();
         } catch (ClassNotFoundException | SQLException e) {
@@ -71,7 +81,7 @@ public class Main {
             statement.executeUpdate(createTableQuery);
         }
     }
-    private static void runUserManagementApp(UserController userController) {
+    private static void runUserManagementApp(UserController userController, ProductController productController, OrderController orderController) {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -110,6 +120,7 @@ public class Main {
                 case 8:
                     break;
                 case 9:
+                    orderController.createOrder(scanner);
                     break;
                 case 10:
                     break;
