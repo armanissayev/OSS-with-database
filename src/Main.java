@@ -75,7 +75,7 @@ public class Main {
                     + "Id SERIAL PRIMARY KEY,"
                     + "UserId INT NOT NULL,"
                     + "ProductId INT NOT NULL,"
-                    + "Quantity INT NOT NULL"
+                    + "Quantity INT NOT NULL,"
                     + "Cost DOUBLE PRECISION NOT NULL)";
 
             statement.executeUpdate(createTableQuery);
@@ -123,6 +123,7 @@ public class Main {
                     orderController.createOrder(scanner);
                     break;
                 case 10:
+                    orderController.getAllOrders();
                     break;
                 case 11:
                     break;

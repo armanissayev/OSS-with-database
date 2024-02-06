@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class OrderController {
     private OrderRepository orderRepository;
     private UserRepository userRepository;
-    private ProductRepository productRepository
+    private ProductRepository productRepository;
     public OrderController(OrderRepository orderRepository, UserRepository userRepository, ProductRepository productRepository) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
@@ -22,16 +22,25 @@ public class OrderController {
         int quantity = scanner.nextInt();
 
         double userBalance = userRepository.getBalanceById(userId);
-        double price = ProductRepository.getPriceById(productId);
+        double price = productRepository.getPriceById(productId);
+        int productQuantity = productRepository.getQuantityById(productId);
 
         double cost = price * quantity;
         if (userBalance < cost) {
             System.out.println("Not enough money! Please try again.");
             return;
+        } else if (productQuantity < quantity) {
+            System.out.println(productQuantity);
+            System.out.println("Not enough products! Please try again.");
+            return;
         } else {
-            userRepository.deductBalanceById(userId, cost);
-            productRepository.deductQuantityById(productId, cost);
+            userRepository.setBalanceById(userId, userBalance - cost);
+            productRepository.setQuantityById(productId, productQuantity - quantity);
             orderRepository.addOrder(userId, productId, quantity, cost);
         }
+    }
+
+    public void getAllOrders() {
+        orderRepository.getAllOrders(userRepository, productRepository);
     }
 }

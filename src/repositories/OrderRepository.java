@@ -1,4 +1,6 @@
 package repositories;
+import controllers.ProductController;
+
 import java.sql.*;
 
 public class OrderRepository {
@@ -23,6 +25,24 @@ public class OrderRepository {
                 System.out.println("Order created successfully!");
             } else {
                 System.out.println("Failed to create an order. Please try again.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getAllOrders(UserRepository userRepository, ProductRepository productRepository) {
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM orders");
+
+            while (resultSet.next()) {
+                int id =resultSet.getInt("id");
+                int userId = resultSet.getInt("UserId");
+                int productId = resultSet.getInt("ProductId");
+                int quantity = resultSet.getInt("Quantity");
+                double cost = resultSet.getDouble("Cost");
+
+                System.out.printf("ID: %d, User: %s, Product: %s, Quantity: %d, Cost: %f", id, userRepository.getUsernameById(userId), productRepository.getProductNameById(productId), quantity, cost);
             }
         } catch (SQLException e) {
             e.printStackTrace();
