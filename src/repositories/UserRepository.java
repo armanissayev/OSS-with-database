@@ -42,10 +42,12 @@ public class UserRepository {
 
     public void setBalanceById(int id, double balance) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
-                "UPDATE users SET Balance = ?, WHERE Id = ?",
+                "UPDATE users SET Balance = ? WHERE Id = ?",
                 Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setDouble(1, balance);
             preparedStatement.setInt(2, id);
+
+            int update = preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

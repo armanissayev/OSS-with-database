@@ -2,6 +2,7 @@ package controllers;
 import entities.User;
 import repositories.*;
 import java.util.Scanner;
+import entities.*;
 
 public class OrderController {
     private OrderRepository orderRepository;
@@ -42,5 +43,18 @@ public class OrderController {
 
     public void getAllOrders() {
         orderRepository.getAllOrders(userRepository, productRepository);
+    }
+
+    public void cancelOrder(Scanner scanner) {
+        System.out.print("Enter ID of the order to cancel: ");
+        int id = scanner.nextInt();
+
+        Order order = orderRepository.getOrderById(id);
+        double userBalance = userRepository.getBalanceById(id);
+        int productQuantity = productRepository.getQuantityById(id);
+
+        userRepository.setBalanceById(order.getUserId(), userBalance + order.getCost());
+        productRepository.setQuantityById(order.getProductId(), productQuantity + order.getQuantity());
+        orderRepository.deleteOrderById(id);
     }
 }

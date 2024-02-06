@@ -95,9 +95,8 @@ public class Main {
             System.out.println("8. Delete product");
             System.out.println("9. Make an order");
             System.out.println("10. Get all orders");
-            System.out.println("11. Update an order");
-            System.out.println("12. Cancel an order");
-            System.out.println("13. Exit");
+            System.out.println("11. Cancel an order");
+            System.out.println("12. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -126,10 +125,9 @@ public class Main {
                     orderController.getAllOrders();
                     break;
                 case 11:
+                    orderController.cancelOrder(scanner);
                     break;
                 case 12:
-                    break;
-                case 13:
                     System.out.println("Exiting the application. Goodbye!");
                     return;
                 default:

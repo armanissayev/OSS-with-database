@@ -57,10 +57,11 @@ public class ProductRepository {
     }
     public void setQuantityById(int id, int quantity) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
-                "UPDATE products SET Quantity = ?, WHERE Id = ?",
+                "UPDATE products SET Quantity = ? WHERE Id = ?",
                 Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setDouble(1, quantity);
             preparedStatement.setInt(2, id);
+            int update = preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

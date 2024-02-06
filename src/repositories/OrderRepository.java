@@ -2,6 +2,7 @@ package repositories;
 import controllers.ProductController;
 
 import java.sql.*;
+import entities.*;
 
 public class OrderRepository {
     private Connection connection;
@@ -43,6 +44,46 @@ public class OrderRepository {
                 double cost = resultSet.getDouble("Cost");
 
                 System.out.printf("ID: %d, User: %s, Product: %s, Quantity: %d, Cost: %f\n", id, userRepository.getUsernameById(userId), productRepository.getProductNameById(productId), quantity, cost);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Order getOrderById(int id) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "SELECT * FROM orders WHERE Id = ?",
+                Statement.RETURN_GENERATED_KEYS)) {
+
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int Id = resultSet.getInt("Id");
+                int userId = resultSet.getInt("UserId");
+                int productId = resultSet.getInt("ProductId");
+                int quantity = resultSet.getInt("Quantity");
+                double cost = resultSet.getDouble("Cost");
+                Order order = new Order(Id, userId, productId, quantity, cost);
+                return order;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void deleteOrderById(int id) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "DELETE FROM orders WHERE Id = ?",
+                Statement.RETURN_GENERATED_KEYS)) {
+
+            preparedStatement.setInt(1, id);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Order canceled successfully!");
+            } else {
+                System.out.println("Failed to cancel an order. Please try again.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
