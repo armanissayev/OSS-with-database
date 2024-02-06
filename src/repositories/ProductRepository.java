@@ -15,7 +15,9 @@ public class ProductRepository {
 
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.getString("Name");
+            while (resultSet.next()) {
+                return resultSet.getString("Name");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -30,7 +30,7 @@ public class OrderController {
             System.out.println("Not enough money! Please try again.");
             return;
         } else if (productQuantity < quantity) {
-            System.out.println(productQuantity);
+            System.out.printf("%d %f %f\n", productQuantity, userBalance, price);
             System.out.println("Not enough products! Please try again.");
             return;
         } else {

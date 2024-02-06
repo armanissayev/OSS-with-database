@@ -42,7 +42,7 @@ public class OrderRepository {
                 int quantity = resultSet.getInt("Quantity");
                 double cost = resultSet.getDouble("Cost");
 
-                System.out.printf("ID: %d, User: %s, Product: %s, Quantity: %d, Cost: %f", id, userRepository.getUsernameById(userId), productRepository.getProductNameById(productId), quantity, cost);
+                System.out.printf("ID: %d, User: %s, Product: %s, Quantity: %d, Cost: %f\n", id, userRepository.getUsernameById(userId), productRepository.getProductNameById(productId), quantity, cost);
             }
         } catch (SQLException e) {
             e.printStackTrace();
