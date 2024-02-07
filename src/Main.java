@@ -115,12 +115,16 @@ public class Main {
                     userController.deleteUser(scanner);
                     break;
                 case 5:
+                    productController.addProduct(scanner);
                     break;
                 case 6:
+                    productController.getAllProducts();
                     break;
                 case 7:
+                    productController.updateProduct(scanner);
                     break;
                 case 8:
+                    productController.deleteProduct(scanner);
                     break;
                 case 9:
                     orderController.createOrder(scanner);
