@@ -103,12 +103,16 @@ public class Main {
 
             switch(choice) {
                 case 1:
+                    userController.addUser(scanner);
                     break;
                 case 2:
+                    userController.getAllUsers();
                     break;
                 case 3:
+                    userController.updateUser(scanner);
                     break;
                 case 4:
+                    userController.deleteUser(scanner);
                     break;
                 case 5:
                     break;

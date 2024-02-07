@@ -13,47 +13,37 @@ public class UserController {
     }
 
     public void addUser(Scanner scanner) {
-        System.out.println("Adding a new user:");
-        System.out.print("Enter user ID: ");
-        int id = scanner.nextInt();
-        System.out.print("Enter user name: ");
+        System.out.print("Enter username: ");
         String name = scanner.next();
-        System.out.print("Enter user email: ");
-        String email = scanner.next();
+        System.out.print("Enter age: ");
+        int age = scanner.nextInt();
+        System.out.print("Enter balance: ");
+        double balance = scanner.nextDouble();
 
-        userRepository.addUser(new User(id, name, email));
-        System.out.println("User added successfully.");
+        userRepository.addUser(name, age, balance);
     }
 
     public void getAllUsers() {
-        System.out.println("Getting all users:");
-        List<User> users = userRepository.getAllUsers();
-        for (User user : users) {
-            System.out.println("ID: " + user.getId() + ", Name: " + user.getName() + ", Email: " + user.getEmail());
-        }
+        userRepository.getAllUsers();
     }
 
     public void updateUser(Scanner scanner) {
-        System.out.println("Updating a user:");
         System.out.print("Enter user ID to update: ");
         int id = scanner.nextInt();
-        if (userRepository.isUserExists(id)) {
-            System.out.print("Enter new user name: ");
-            String newName = scanner.next();
-            System.out.print("Enter new user email: ");
-            String newEmail = scanner.next();
+        System.out.print("Enter new username: ");
+        String newName = scanner.next();
+        System.out.print("Enter new age: ");
+        int newAge = scanner.nextInt();
+        System.out.println("Enter new balance: ");
+        double newBalance = scanner.nextDouble();
 
-            userRepository.updateUser(id, newName, newEmail);
-            System.out.println("User updated successfully.");
-        } else {
-            System.out.println("User not found.");
-        }
+        userRepository.updateUserById(id, newName, newAge, newBalance);
     }
 
 public void deleteUser(Scanner scanner) {
     System.out.print("Enter user ID to delete: ");
     int id = scanner.nextInt();
-    userRepository.deleteUser(id);
+    userRepository.deleteUserById(id);
 }
 
 }
