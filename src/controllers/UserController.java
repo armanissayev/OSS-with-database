@@ -50,15 +50,10 @@ public class UserController {
         }
     }
 
-    public void deleteUser(Scanner scanner) {
-        System.out.println("Deleting a user:");
-        System.out.print("Enter user ID to delete: ");
-        int id = scanner.nextInt();
-        if (userRepository.isUserExists(id)) {
-            userRepository.deleteUser(id);
-            System.out.println("User deleted successfully.");
-        } else {
-            System.out.println("User not found.");
-        }
-    }
+public void deleteUser(Scanner scanner) {
+    System.out.print("Enter user ID to delete: ");
+    int id = scanner.nextInt();
+    userRepository.deleteUser(id);
+}
+
 }
