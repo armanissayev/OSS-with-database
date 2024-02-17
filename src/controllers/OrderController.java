@@ -8,6 +8,8 @@ public class OrderController {
     private OrderRepository orderRepository;
     private UserRepository userRepository;
     private ProductRepository productRepository;
+    private CreateOrder createOrder;
+    private CancelOrder cancelOrder;
     public OrderController(OrderRepository orderRepository, UserRepository userRepository, ProductRepository productRepository) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
@@ -15,6 +17,20 @@ public class OrderController {
     }
 
     public void createOrder(Scanner scanner) {
+        this.createOrder.createOrder(scanner, userRepository, productRepository, orderRepository);
+    }
+
+    public void getAllOrders() {
+        orderRepository.getAllOrders(userRepository, productRepository);
+    }
+
+    public void cancelOrder(Scanner scanner) {
+        this.cancelOrder.cancelOrder(scanner, userRepository, productRepository, orderRepository);
+    }
+}
+
+class CreateOrder {
+    public void createOrder(Scanner scanner, UserRepository userRepository, ProductRepository productRepository, OrderRepository orderRepository) {
         System.out.print("Enter ID of the user: ");
         int userId = scanner.nextInt();
         System.out.print("Enter ID of the product: ");
@@ -40,12 +56,10 @@ public class OrderController {
             orderRepository.addOrder(userId, productId, quantity, cost);
         }
     }
+}
 
-    public void getAllOrders() {
-        orderRepository.getAllOrders(userRepository, productRepository);
-    }
-
-    public void cancelOrder(Scanner scanner) {
+class CancelOrder {
+    public void cancelOrder(Scanner scanner, UserRepository userRepository, ProductRepository productRepository, OrderRepository orderRepository) {
         System.out.print("Enter ID of the order to cancel: ");
         int id = scanner.nextInt();
 
