@@ -8,12 +8,35 @@ import java.util.Scanner;
 
 public class ProductController {
     private ProductRepository productRepository;
+    private AddProduct addProduct;
+    private GetAllProducts getAllProducts;
+    private DeleteProduct deleteProduct;
+    private UpdateProduct updateProduct;
 
     public ProductController(ProductRepository productRepository) {
         this.productRepository = productRepository;
+        this.addProduct = addProduct;
     }
 
     public void addProduct(Scanner scanner) {
+        addProduct.addProduct(scanner, productRepository);
+    }
+
+    public void getAllProducts() {
+        getAllProducts.getAllProducts(productRepository);
+    }
+
+    public void updateProduct(Scanner scanner) {
+        updateProduct.updateProduct(scanner, productRepository);
+    }
+
+    public void deleteProduct(Scanner scanner) {
+        deleteProduct.deleteProduct(scanner, productRepository);
+    }
+}
+
+class AddProduct {
+    public void addProduct(Scanner scanner, ProductRepository productRepository) {
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
         System.out.print("Enter product price: ");
@@ -22,8 +45,10 @@ public class ProductController {
         int quantity = scanner.nextInt();
         productRepository.addProduct(name, price, quantity);
     }
+}
 
-    public void getAllProducts() {
+class GetAllProducts {
+    public void getAllProducts(ProductRepository productRepository) {
         List<Products> productsList = productRepository.getAllProducts();
         for (Products product : productsList) {
             System.out.println("ID: " + product.getId() +
@@ -32,11 +57,13 @@ public class ProductController {
                     ", Quantity: " + product.getQuantity());
         }
     }
+}
 
-    public void updateProduct(Scanner scanner) {
+class UpdateProduct {
+    public void updateProduct(Scanner scanner, ProductRepository productRepository) {
         System.out.print("Enter product ID to update: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // consume newline
+        scanner.nextLine();
         System.out.print("Enter new product name: ");
         String name = scanner.nextLine();
         System.out.print("Enter new product price: ");
@@ -45,8 +72,10 @@ public class ProductController {
         int quantity = scanner.nextInt();
         productRepository.updateProduct(id, name, price, quantity);
     }
+}
 
-    public void deleteProduct(Scanner scanner) {
+class DeleteProduct {
+    public void deleteProduct(Scanner scanner, ProductRepository productRepository) {
         System.out.print("Enter product ID to delete: ");
         int id = scanner.nextInt();
         productRepository.deleteProduct(id);
