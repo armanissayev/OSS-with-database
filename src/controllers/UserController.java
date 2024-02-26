@@ -11,8 +11,11 @@ public class UserController {
     private UpdateUser updateUser;
     private DeleteUser deleteUser;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController() {
+        this.userRepository = UserRepository.getInstance();
+        addUser = new AddUser();
+        updateUser = new UpdateUser();
+        deleteUser = new DeleteUser();
     }
 
     public void addUser(Scanner scanner) {

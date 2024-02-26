@@ -3,6 +3,7 @@ import entities.User;
 import repositories.*;
 import java.util.Scanner;
 import entities.*;
+import java.sql.Connection;
 
 public class OrderController {
     private OrderRepository orderRepository;
@@ -10,10 +11,12 @@ public class OrderController {
     private ProductRepository productRepository;
     private CreateOrder createOrder;
     private CancelOrder cancelOrder;
-    public OrderController(OrderRepository orderRepository, UserRepository userRepository, ProductRepository productRepository) {
-        this.orderRepository = orderRepository;
-        this.userRepository = userRepository;
-        this.productRepository = productRepository;
+    public OrderController() {
+        orderRepository = OrderRepository.getInstance();
+        userRepository = UserRepository.getInstance();
+        productRepository = ProductRepository.getInstance();
+        createOrder = new CreateOrder();
+        cancelOrder = new CancelOrder();
     }
 
     public void createOrder(Scanner scanner) {

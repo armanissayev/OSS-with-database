@@ -5,9 +5,35 @@ import java.sql.*;
 import entities.*;
 
 public class OrderRepository {
-    private Connection connection;
-    public OrderRepository(Connection connection) {
-        this.connection = connection;
+    private static Connection connection;
+    private static OrderRepository instance;
+    private OrderRepository() {
+        try {
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/", "postgres", "0000");
+            createTableIfNotExists();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static synchronized OrderRepository getInstance() {
+        if (instance == null){
+            instance = new OrderRepository();
+        }
+        return instance;
+    }
+
+    private static void createTableIfNotExists() throws SQLException {
+        try (Statement statement = connection.createStatement()) {
+            String createTableQuery = "CREATE TABLE IF NOT EXISTS orders ("
+                    + "Id SERIAL PRIMARY KEY,"
+                    + "UserId INT NOT NULL,"
+                    + "ProductId INT NOT NULL,"
+                    + "Quantity INT NOT NULL,"
+                    + "Cost DOUBLE PRECISION NOT NULL)";
+
+            statement.executeUpdate(createTableQuery);
+        }
     }
 
     public void addOrder(int userId, int productId, int quantity, double cost) {

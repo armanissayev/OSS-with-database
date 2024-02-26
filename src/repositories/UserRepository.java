@@ -3,12 +3,36 @@ import java.sql.*;
 import entities.*;
 
 public class UserRepository {
-    private Connection connection;
+    private static Connection connection;
+    private static UserRepository instance;
 
-    public UserRepository(Connection connection) {
-        this.connection = connection;
+    private UserRepository() {
+        try {
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/", "postgres", "0000");
+            createTableIfNotExists();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
+    public static synchronized UserRepository getInstance() {
+        if (instance == null) {
+            instance = new UserRepository();
+        }
+        return instance;
+    }
+
+    private static void createTableIfNotExists() throws SQLException {
+        try (Statement statement = connection.createStatement()) {
+            String createTableQuery = "CREATE TABLE IF NOT EXISTS users ("
+                    + "Id SERIAL PRIMARY KEY,"
+                    + "Username VARCHAR(50) NOT NULL,"
+                    + "Age INT NOT NULL,"
+                    + "Balance DOUBLE PRECISION NOT NULL)";
+
+            statement.executeUpdate(createTableQuery);
+        }
+    }
 
     public void addUser(String username, int age, double balance) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(

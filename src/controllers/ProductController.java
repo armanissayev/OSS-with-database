@@ -6,6 +6,8 @@ import repositories.ProductRepository;
 import java.util.List;
 import java.util.Scanner;
 
+import java.sql.Connection;
+
 public class ProductController {
     private ProductRepository productRepository;
     private AddProduct addProduct;
@@ -13,9 +15,12 @@ public class ProductController {
     private DeleteProduct deleteProduct;
     private UpdateProduct updateProduct;
 
-    public ProductController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-        this.addProduct = addProduct;
+    public ProductController() {
+        productRepository = ProductRepository.getInstance();
+        addProduct = new AddProduct();
+        getAllProducts = new GetAllProducts();
+        deleteProduct = new DeleteProduct();
+        updateProduct = new UpdateProduct();
     }
 
     public void addProduct(Scanner scanner) {

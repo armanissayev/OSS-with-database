@@ -13,74 +13,21 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 public class Main {
-    private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/postgres";
+    private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/postgres/";
     private static final String USERNAME = "postgres";
     private static final String PASSWORD = "0000";
 
     public static void main(String[] args) {
-        try {
-            Class.forName("org.postgresql.Driver");
-
-            Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
-
-            createUsersTable(connection);
-            createProductsTable(connection);
-            createOrdersTable(connection);
-
             // User
-            UserRepository userRepository = new UserRepository(connection);
-            UserController userController = new UserController(userRepository);
-
+            UserController userController = new UserController();
             // Product
-            ProductRepository productRepository = new ProductRepository(connection);
-            ProductController productController = new ProductController(productRepository);
-
-
+            ProductController productController = new ProductController();
             // Order
-            OrderRepository orderRepository = new OrderRepository(connection);
-            OrderController orderController = new OrderController(orderRepository, userRepository, productRepository);
+            OrderController orderController = new OrderController();
 
             runUserManagementApp(userController, productController, orderController);
-
-            connection.close();
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
     }
-    private static void createUsersTable(Connection connection) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
-            String createTableQuery = "CREATE TABLE IF NOT EXISTS users ("
-                    + "Id SERIAL PRIMARY KEY,"
-                    + "Username VARCHAR(50) NOT NULL,"
-                    + "Age INT NOT NULL,"
-                    + "Balance DOUBLE PRECISION NOT NULL)";
 
-            statement.executeUpdate(createTableQuery);
-        }
-    }
-    private static void createProductsTable(Connection connection) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
-            String createTableQuery = "CREATE TABLE IF NOT EXISTS products ("
-                    + "Id SERIAL PRIMARY KEY,"
-                    + "Name VARCHAR(50) NOT NULL,"
-                    + "Price DOUBLE PRECISION NOT NULL,"
-                    + "Quantity INT NOT NULL)";
-
-            statement.executeUpdate(createTableQuery);
-        }
-    }
-    private static void createOrdersTable(Connection connection) throws SQLException {
-        try (Statement statement = connection.createStatement()) {
-            String createTableQuery = "CREATE TABLE IF NOT EXISTS orders ("
-                    + "Id SERIAL PRIMARY KEY,"
-                    + "UserId INT NOT NULL,"
-                    + "ProductId INT NOT NULL,"
-                    + "Quantity INT NOT NULL,"
-                    + "Cost DOUBLE PRECISION NOT NULL)";
-
-            statement.executeUpdate(createTableQuery);
-        }
-    }
     private static void runUserManagementApp(UserController userController, ProductController productController, OrderController orderController) {
         Scanner scanner = new Scanner(System.in);
 

@@ -6,10 +6,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRepository {
-    private Connection connection;
+    private static Connection connection;
+    private static ProductRepository instance;
 
-    public ProductRepository(Connection connection) {
-        this.connection = connection;
+    private ProductRepository() {
+        try {
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/", "postgres", "0000");
+            createTableIfNotExists();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static synchronized ProductRepository getInstance() {
+        if (instance == null) {
+            instance = new ProductRepository();
+        }
+        return instance;
+    }
+
+    private static void createTableIfNotExists() throws SQLException {
+        try (Statement statement = connection.createStatement()) {
+            String createTableQuery = "CREATE TABLE IF NOT EXISTS products ("
+                    + "Id SERIAL PRIMARY KEY,"
+                    + "Name VARCHAR(50) NOT NULL,"
+                    + "Price DOUBLE PRECISION NOT NULL,"
+                    + "Quantity INT NOT NULL)";
+
+            statement.executeUpdate(createTableQuery);
+        }
     }
 
     public void addProduct(String name, double price, int quantity) {
