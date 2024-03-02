@@ -6,54 +6,36 @@ import repositories.ProductRepository;
 import java.util.List;
 import java.util.Scanner;
 
-import java.sql.Connection;
-
 public class ProductController {
     private ProductRepository productRepository;
-    private AddProduct addProduct;
-    private GetAllProducts getAllProducts;
-    private DeleteProduct deleteProduct;
-    private UpdateProduct updateProduct;
+    private ProductFactory productFactory;
 
-    public ProductController() {
-        productRepository = ProductRepository.getInstance();
-        addProduct = new AddProduct();
-        getAllProducts = new GetAllProducts();
-        deleteProduct = new DeleteProduct();
-        updateProduct = new UpdateProduct();
+    public ProductController(ProductFactory productFactory) {
+        this.productRepository = ProductRepository.getInstance();
+        this.productFactory = this.productFactory;
     }
 
     public void addProduct(Scanner scanner) {
-        addProduct.addProduct(scanner, productRepository);
-    }
-
-    public void getAllProducts() {
-        getAllProducts.getAllProducts(productRepository);
+        Products product = createProductFromInput(scanner);
+        productRepository.addProduct(product);
     }
 
     public void updateProduct(Scanner scanner) {
-        updateProduct.updateProduct(scanner, productRepository);
+        System.out.print("Enter product ID to update: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        Products product = createProductFromInput(scanner);
+        product.setId(id);
+        productRepository.updateProduct(product);
     }
 
     public void deleteProduct(Scanner scanner) {
-        deleteProduct.deleteProduct(scanner, productRepository);
+        System.out.print("Enter product ID to delete: ");
+        int id = scanner.nextInt();
+        productRepository.deleteProduct(id);
     }
-}
 
-class AddProduct {
-    public void addProduct(Scanner scanner, ProductRepository productRepository) {
-        System.out.print("Enter product name: ");
-        String name = scanner.nextLine();
-        System.out.print("Enter product price: ");
-        double price = scanner.nextDouble();
-        System.out.print("Enter product quantity: ");
-        int quantity = scanner.nextInt();
-        productRepository.addProduct(name, price, quantity);
-    }
-}
-
-class GetAllProducts {
-    public void getAllProducts(ProductRepository productRepository) {
+    public void getAllProducts() {
         List<Products> productsList = productRepository.getAllProducts();
         for (Products product : productsList) {
             System.out.println("ID: " + product.getId() +
@@ -62,27 +44,17 @@ class GetAllProducts {
                     ", Quantity: " + product.getQuantity());
         }
     }
-}
 
-class UpdateProduct {
-    public void updateProduct(Scanner scanner, ProductRepository productRepository) {
-        System.out.print("Enter product ID to update: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Enter new product name: ");
+    private Products createProductFromInput(Scanner scanner) {
+        System.out.print("Enter product name: ");
         String name = scanner.nextLine();
-        System.out.print("Enter new product price: ");
+        System.out.print("Enter product price: ");
         double price = scanner.nextDouble();
-        System.out.print("Enter new product quantity: ");
+        System.out.print("Enter product quantity: ");
         int quantity = scanner.nextInt();
-        productRepository.updateProduct(id, name, price, quantity);
-    }
-}
+        scanner.nextLine(); // Чистим буфер
 
-class DeleteProduct {
-    public void deleteProduct(Scanner scanner, ProductRepository productRepository) {
-        System.out.print("Enter product ID to delete: ");
-        int id = scanner.nextInt();
-        productRepository.deleteProduct(id);
+        // Создаем продукт с помощью фабричного метода
+        return productFactory.createProduct(name, price, quantity);
     }
 }
