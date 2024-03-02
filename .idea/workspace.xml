@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11fda053-fec0-459f-af1d-e7ea9410fd44" name="Changes" comment="Singleton Pattern">
+    <list default="true" id="11fda053-fec0-459f-af1d-e7ea9410fd44" name="Changes" comment="some bug fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/ProductFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ProductFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +107,7 @@
       <workItem from="1708486269171" duration="35000" />
       <workItem from="1708946044629" duration="1775000" />
       <workItem from="1709097633113" duration="1944000" />
-      <workItem from="1709348612333" duration="690000" />
+      <workItem from="1709348612333" duration="2921000" />
     </task>
     <task id="LOCAL-00001" summary="New repository created">
       <option name="closed" value="true" />
@@ -207,7 +205,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708947593750</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="some bug fixes">
+      <option name="closed" value="true" />
+      <created>1709349402376</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1709349402376</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -235,6 +241,7 @@
     <MESSAGE value="finished" />
     <MESSAGE value="Single Responsibility for Order, User" />
     <MESSAGE value="Singleton Pattern" />
-    <option name="LAST_COMMIT_MESSAGE" value="Singleton Pattern" />
+    <MESSAGE value="some bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="some bug fixes" />
   </component>
 </project>
