@@ -8,13 +8,11 @@ public class Main {
     private static final String PASSWORD = "0000";
 
     public static void main(String[] args) {
-        // Создаем экземпляр фабрики продуктов
-        ProductFactory productFactory = new ProductFactory();
 
         // User
         UserController userController = new UserController();
         // Product
-        ProductController productController = new ProductController(productFactory); // Передаем фабрику продуктов в конструктор
+        ProductController productController = new ProductController(); // Передаем фабрику продуктов в конструктор
         // Order
         OrderController orderController = new OrderController();
 

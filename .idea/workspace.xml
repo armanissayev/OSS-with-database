@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11fda053-fec0-459f-af1d-e7ea9410fd44" name="Changes" comment="Single Responsibility for Order, User">
+    <list default="true" id="11fda053-fec0-459f-af1d-e7ea9410fd44" name="Changes" comment="Singleton Pattern">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/OrderController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/repositories/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/repositories/OrderRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/repositories/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/repositories/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/repositories/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/ProductFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/ProductFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +107,9 @@
       <workItem from="1707289581408" duration="2731000" />
       <workItem from="1708139227943" duration="3936000" />
       <workItem from="1708486269171" duration="35000" />
-      <workItem from="1708946044629" duration="1512000" />
+      <workItem from="1708946044629" duration="1775000" />
+      <workItem from="1709097633113" duration="1944000" />
+      <workItem from="1709348612333" duration="690000" />
     </task>
     <task id="LOCAL-00001" summary="New repository created">
       <option name="closed" value="true" />
@@ -201,7 +199,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708142220302</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Singleton Pattern">
+      <option name="closed" value="true" />
+      <created>1708947593750</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1708947593750</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,6 +234,7 @@
     <MESSAGE value="Implemented all user functions" />
     <MESSAGE value="finished" />
     <MESSAGE value="Single Responsibility for Order, User" />
-    <option name="LAST_COMMIT_MESSAGE" value="Single Responsibility for Order, User" />
+    <MESSAGE value="Singleton Pattern" />
+    <option name="LAST_COMMIT_MESSAGE" value="Singleton Pattern" />
   </component>
 </project>

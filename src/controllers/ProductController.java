@@ -10,9 +10,9 @@ public class ProductController {
     private ProductRepository productRepository;
     private ProductFactory productFactory;
 
-    public ProductController(ProductFactory productFactory) {
-        this.productRepository = ProductRepository.getInstance();
-        this.productFactory = this.productFactory;
+    public ProductController() {
+        productRepository = ProductRepository.getInstance();
+        productFactory = ProductFactory.getInstance();
     }
 
     public void addProduct(Scanner scanner) {
