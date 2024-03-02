@@ -37,13 +37,13 @@ public class ProductRepository {
         }
     }
 
-    public void addProduct(String name, double price, int quantity) {
+    public void addProduct(Products product) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 "INSERT INTO products (Name, Price, Quantity) VALUES (?, ?, ?)",
                 Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(1, name);
-            preparedStatement.setDouble(2, price);
-            preparedStatement.setInt(3, quantity);
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setDouble(2, product.getPrice());
+            preparedStatement.setInt(3, product.getQuantity());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -68,13 +68,13 @@ public class ProductRepository {
         return productsList;
     }
 
-    public void updateProduct(int id, String name, double price, int quantity) {
+    public void updateProduct(Products product) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 "UPDATE products SET Name = ?, Price = ?, Quantity = ? WHERE Id = ?")) {
-            preparedStatement.setString(1, name);
-            preparedStatement.setDouble(2, price);
-            preparedStatement.setInt(3, quantity);
-            preparedStatement.setInt(4, id);
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setDouble(2, product.getPrice());
+            preparedStatement.setInt(3, product.getQuantity());
+            preparedStatement.setInt(4, product.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
