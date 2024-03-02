@@ -1,16 +1,6 @@
 import controllers.*;
-import entities.*;
-import repositories.*;
+import controllers.ProductFactory;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 public class Main {
     private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/postgres/";
@@ -18,15 +8,19 @@ public class Main {
     private static final String PASSWORD = "0000";
 
     public static void main(String[] args) {
-            // User
-            UserController userController = new UserController();
-            // Product
-            ProductController productController = new ProductController();
-            // Order
-            OrderController orderController = new OrderController();
+        // Создаем экземпляр фабрики продуктов
+        ProductFactory productFactory = new ProductFactory();
 
-            runUserManagementApp(userController, productController, orderController);
+        // User
+        UserController userController = new UserController();
+        // Product
+        ProductController productController = new ProductController(productFactory); // Передаем фабрику продуктов в конструктор
+        // Order
+        OrderController orderController = new OrderController();
+
+        runUserManagementApp(userController, productController, orderController);
     }
+
 
     private static void runUserManagementApp(UserController userController, ProductController productController, OrderController orderController) {
         Scanner scanner = new Scanner(System.in);
